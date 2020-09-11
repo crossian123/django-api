@@ -1,8 +1,8 @@
-FROM python:3.7-slim-buster
+FROM python:3.7
 
 # Install into Debian
 RUN apt-get update \
-    # && apt-get install -y sudo wget gnupg2 vim \
+    && apt-get install -y sudo wget gnupg2 vim \
     # set Japanese
     && apt-get install fonts-ipafont-gothic fonts-ipafont-mincho
 
