@@ -1,3 +1,16 @@
+## After Deploy
+1. イメージを更新
+```
+$ dock build -t [GCRイメージ]:latest .
+```
+2. latestだったイメージは<none>になるので削除
+3. Cloud-Registoryに push -> Cloud Runへ Deploy
+```
+$ docker push [GCRイメージ]:latest
+$ gcloud run deploy --image [GCRイメージ]:latest --port 8000 --platform managed
+```
+
+
 ## For Development
 ### 1. build docker-image for local
 ```
