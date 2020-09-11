@@ -1,34 +1,6 @@
-## After Deploy
-1. イメージを更新
-```
-$ dock build -t [GCRイメージ]:latest .
-```
-2. latestだったイメージは<none>になるので削除
-3. Cloud-Registoryに push -> Cloud Runへ Deploy
-```
-$ docker push [GCRイメージ]:latest
-$ gcloud run deploy --image [GCRイメージ]:latest --port 8000 --platform managed
-```
-
-
-## For Development
-### 1. build docker-image for local
-```
-$ docker build -t [イメージ名:タグ名] [Dockerfileのパス]
-$ docker build -t django_app:latest .
-```
-
-### 2. create docker-container
-```
-$ docker run --name [コンテナ名] -p [ホスト側ポート:コンテナ側ポート] -it [イメージ名:タグ名]
-$ docker run --name django_app -p 8000:8000 -it django_app:latest
-```
-
-
-
 ## For Production
-### 0. settings Cloud-Registory & Cloud Run
-- Cloud Runを有効化：`https://cloud.google.com/run/docs/setup?hl=ja`
+### 0. settings Cloud-Registory & Cloud Run & Cloud Build
+- 3つを有効化：`https://cloud.google.com/run/docs/setup?hl=ja`
 - [GCRイメージ] = `[host_name]/[project_id]/[image_name]`
 
 ### 1. auth docker
@@ -37,12 +9,9 @@ $ docker run --name django_app -p 8000:8000 -it django_app:latest
 $ gcloud auth configure-docker
 ```
 
-### 2. build docker-image for Cloud-Registory
+### 2. build image for Cloud-Registory
 ```
 $ docker build -t [GCRイメージ名] [Dockerfileのパス]
-or
-$ docker tag [開発したイメージ名] [GCRイメージ名]
-$ docker tag [django_api:latest] asia.gcr.io/[プロジェクトID]/[イメージ名]
 ```
 
 ### 3. push image to Cloud-Registory
@@ -51,7 +20,7 @@ $ docker tag [django_api:latest] asia.gcr.io/[プロジェクトID]/[イメー�
 $ docker push [GCRイメージ名]
 ```
 
-### 4. deploy to Cloud-Run
+### 4. deploy image to Cloud-Run
 参考：`https://cloud.google.com/run/docs/configuring/containers?hl=ja#command-line`
 ```
 $ gcloud run deploy --image [GCRイメージ名] --port 8000 --platform managed
