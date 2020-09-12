@@ -29,7 +29,6 @@ $ gcloud run deploy --image [GCRイメージ名] --port 8000 --platform managed
 
 
 ## 1〜4. automatic with cloudbuild.yaml
-### loudbuild.yaml
 ```yaml
 steps:
   # [build or rebuild image]
