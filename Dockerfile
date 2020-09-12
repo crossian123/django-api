@@ -16,7 +16,6 @@ COPY ./code ./
 # Install Python Libraries
 RUN pip install --no-cache-dir -r requirements.txt
 
-
 EXPOSE 8000
 # can overwrite
 CMD ["gunicorn", "-b", ":8000", "config.wsgi:application"]

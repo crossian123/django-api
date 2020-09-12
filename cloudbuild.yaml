@@ -1,6 +1,6 @@
-# image build -> push image -> deploy image
+
 steps:
-# [build image]
+# [build or rebuild image]
 - name: 'gcr.io/cloud-builders/docker' # standard container name
   # exec command
   entrypoint: docker
@@ -15,6 +15,11 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: gcloud
   args: ['run', 'deploy', 'django-api', '--region', 'asia-northeast1', '--image', 'asia.gcr.io/django-api-289204/django-api:latest', '--port', '8000', '--platform', 'managed']
+
+#   # [test]
+# - name: 'python'
+#   entrypoint: python
+#   args: ['code/test.py']
 
 # GCR image name
 images:

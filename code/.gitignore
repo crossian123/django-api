@@ -1,0 +1,4 @@
+.env
+.venv
+Pipfile.lock
+cloud_sql_proxy
